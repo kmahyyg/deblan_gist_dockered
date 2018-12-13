@@ -1,1 +1,15 @@
- 
+ccp.ooo {
+    root /opt/gistpb/web
+    tls off
+    # tls i@kmahyyg.xyz
+    gzip
+    minify
+    cors
+    timeouts none
+    
+    fastcgi / 127.0.0.1:9000 php {
+        ext   .php
+        split .php
+        index index.php
+    }
+}
