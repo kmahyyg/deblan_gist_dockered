@@ -11,7 +11,7 @@ api:
     base_url: 'https://ccp.ooo'
     client: { api_key: 2ERdGQAu9gOX00EgZ4ooPi1QJkqSCltrhlKSNVsV }
 data:
-    path: data/git
+    path: /data/gistpb/data/git
 git:
     path: /usr/bin/git
 theme:

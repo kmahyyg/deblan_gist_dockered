@@ -1,7 +1,6 @@
-127.0.0.1:80 {
+https://ccp.ooo {
     root /opt/gistpb/web
-    #tls i@kmahyyg.xyz
-    tls off
+    tls i@kmahyyg.xyz
     minify
     cors
     timeouts none
