@@ -1,11 +1,17 @@
-ccp.ooo {
+127.0.0.1:80 {
     root /opt/gistpb/web
-    tls i@kmahyyg.xyz
-    gzip
+    tls off
     minify
     cors
     timeouts none
-    
+    log stdout
+    errors stdout
+    index index.php
+    rewrite {
+	    regexp (.*)
+	    ext /
+	    to /index.php{path}
+    }
     fastcgi / 127.0.0.1:9000 php {
         ext   .php
         split .php

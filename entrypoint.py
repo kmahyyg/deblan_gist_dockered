@@ -5,6 +5,7 @@ import os
 confphp = os.path.isfile('/opt/gistpb/app/config/propel/config.php')
 
 if confphp == False:
+    os.chdir('/opt/gistpb')
     os.system('chmod +x /usr/bin/firsttime.sh')
     os.system('/usr/bin/firsttime.sh')
 else:
