@@ -1,5 +1,5 @@
 security:
-    token: 04323fe3a8b5bcab5eb730e7deeccd87eb823f05
+    token: 34a18c89d8995c3452cdd78ffe08fe133f32eea4
     enable_registration: true
     enable_login: true
     login_required_to_edit_gist: true
@@ -8,8 +8,8 @@ security:
 api:
     enabled: true
     api_key_required: true
-    base_url: 'https://ccp.ooo'
-    client: { api_key: 2ERdGQAu9gOX00EgZ4ooPi1QJkqSCltrhlKSNVsV }
+    base_url: 'https://EXAMPLE.com'
+    client: { api_key: GDP7knrm5xjlASm31Svw21Cn989P0PplTyMQ }
 data:
     path: /data/gistpb/data/git
 git:

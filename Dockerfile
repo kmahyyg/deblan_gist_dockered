@@ -8,6 +8,7 @@ FROM ubuntu:18.04
 VOLUME /data
 
 ENV GIT_USRNM="kmahyyg"
+ENV CADDYPATH="/data/caddyssl"
 ENV GIT_MAILADDR="16604643+kmahyyg@users.noreply.github.com"
 ENV rGDeps="npm php php-mysql php-pdo-sqlite php-cgi php-xml git git-lfs patch build-essential less ca-certificates curl zip unzip libxml2 libxml2-dev php-pear php-fpm supervisor python3 python2.7"
 

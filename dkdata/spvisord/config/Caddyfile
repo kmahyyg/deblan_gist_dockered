@@ -1,6 +1,6 @@
-127.0.0.1:80 {
+https://EXAMPLE.com {
     root /opt/gistpb/web
-    tls off
+    tls YOUR@MAIL.COM
     minify
     cors
     timeouts none
