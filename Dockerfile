@@ -9,7 +9,7 @@ VOLUME /data
 
 ENV GIT_USRNM="kmahyyg"
 ENV GIT_MAILADDR="16604643+kmahyyg@users.noreply.github.com"
-ENV rGDeps="npm php php-mysql mysql-server php-pdo-sqlite php-cgi php-xml git git-lfs patch build-essential less ca-certificates curl zip unzip libxml2 libxml2-dev php-pear php-fpm supervisor python3 python2.7"
+ENV rGDeps="npm php php-mysql mysql-server php-pdo-sqlite php-cgi php-xml git git-lfs patch build-essential less ca-certificates curl zip unzip libxml2 libxml2-dev php-pear php-fpm supervisor python3 python2.7 net-tools"
 
 WORKDIR /root
 

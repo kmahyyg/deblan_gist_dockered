@@ -3,10 +3,11 @@
 cd /opt/gistpb
 composer install
 cp -f /data/gistpb/propel.yaml propel.yaml
-ln -fs /data/gistpb/data /opt/gistpb/data
 ln -fs /data/gistpb/caddyssl /root/.caddy
 mkdir -p /opt/gistpb/data/git
 mkdir -p /opt/gistpb/data/cache
+mkdir -p /opt/gistpb/cache
+chmod -R 666 /opt/gistpb/cache
 chown -R www-data:www-data data
 make propel
 cp -f /data/gistpb/app/config/config.yml /opt/gistpb/app/config/config.yml
