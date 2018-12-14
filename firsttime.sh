@@ -4,7 +4,8 @@ cd /opt/gistpb
 composer install
 cp -f /data/gistpb/propel.yaml propel.yaml
 ln -fs /data/gistpb/caddyssl /root/.caddy
-mkdir -p /opt/gistpb/data/git
+mkdir -p /data/gistpb/data/git
+mkdir -p /data/gistpb/data/cache
 mkdir -p /opt/gistpb/data/cache
 mkdir -p /opt/gistpb/cache
 chmod -R 666 /opt/gistpb/cache
