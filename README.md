@@ -22,33 +22,52 @@ For config details, check the upstream link:
 - https://gitnet.fr/deblan/gist/src/branch/master/src/Gist/Composer/PostInstallHandler.php
 - https://gitnet.fr/deblan/gist/wiki/_pages
 
-Docker will mount `../dkdata` as `/data`. Please modify the config file according to your instance.
+Please mount `./dkdata` as `/data`. Please modify the config file according to your instance.
 
 ```
 .
-├── app
-│   └── config
-│       ├── config.yml
-│       └── propel
-│           └── config.php
-├── data
-│   └── git
-│   └── cache
-│   └── gist.sqlite
-└── propel.yaml
+├── caddyssl
+├── gistpb
+│   ├── app
+│   │   └── config
+│   │       └── config.yml
+│   ├── data
+│   └── propel.yaml
+└── spvisord
+    ├── config
+    │   ├── Caddyfile
+    │   └── php-fpm.conf
+    └── supervisord.conf
+
 ```
 
-`propel.yaml` SHOULD NOT BE MODIFIED and the program will put it into the docker container!
+## Gist Pastebin
 
-`./app/config/propel/config.php` SHOULD NOT BE MODIFIED!
+`./gistpb/propel.yaml` **SHOULD NOT BE MODIFIED** and the program will put it into the docker container!
 
-`./data` folder should be accessed by webserver.
+`./gistpb/data` folder should be accessed by webserver.
 
-`./app/config/config.yml` should be modified according to your environment:
+`./gistpb/app/config/config.yml` should be modified according to your environment:
 
 - token: sha1(uuidgen())
 - api_key: 'WRITE SOMETHING AS YOU PLEASED' (Recommend: secrets.token_urlsafe(28) in Python 3.6+)
 - Other things: Check upstream documents
+
+## Supervisord
+
+Modify the config about `php-fpm`, `supervisord.conf`, `Caddyfile` according to your circumstances.
+
+ **If not necessary, please don't modify all files except `Caddyfile`.**
+
+## Caddy
+
+Caddy server is a light-weight, high-performance web server written in Golang.
+
+The `caddy` executable file contains full plugins, use it as you want.
+
+See more details about it at https://caddyserver.com/docs 
+
+**YOU SHOULD MODIFY THE HOSTNAME AND EMAIL USED FOR SIGN A TLS CERT AT LEAST.**
 
 # Upstream
 

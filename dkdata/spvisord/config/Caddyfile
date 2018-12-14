@@ -1,7 +1,6 @@
 ccp.ooo {
     root /opt/gistpb/web
-    tls off
-    # tls i@kmahyyg.xyz
+    tls i@kmahyyg.xyz
     gzip
     minify
     cors

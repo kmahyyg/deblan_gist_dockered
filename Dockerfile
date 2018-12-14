@@ -4,17 +4,22 @@
 
 # Install prerequisties Software and copy config files
 FROM ubuntu:18.04
+
 VOLUME /data
 
 ENV GIT_USRNM="kmahyyg"
 ENV GIT_MAILADDR="16604643+kmahyyg@users.noreply.github.com"
-ENV rGDeps="npm php php-mysql mysql-server php-pdo-sqlite php-cgi php-xml git git-lfs patch build-essential less ca-certificates curl zip unzip libxml2 libxml2-dev php-pear php-fpm supervisor"
+ENV rGDeps="npm php php-mysql mysql-server php-pdo-sqlite php-cgi php-xml git git-lfs patch build-essential less ca-certificates curl zip unzip libxml2 libxml2-dev php-pear php-fpm supervisor python3 python2.7"
 
-RUN echo "US/Pacific" | tee /etc/timezone \
-    && dpkg-reconfigure --frontend noninteractive tzdata
-    && apt-get update -y \
+WORKDIR /root
+
+RUN apt-get update -y \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install tzdata -y \
+    && echo "US/Pacific" | tee /etc/timezone \
+    && ln -fs /usr/share/zoneinfo/US/Pacific /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
     && apt install --no-install-recommends -y $rGDeps \
-    && mkdir -p /run/php \
     && git config --global user.email $GIT_MAILADDR \
     && git config --global user.name $GIT_USRNM \
     && curl -sS https://getcomposer.org/installer | php \
@@ -25,32 +30,23 @@ RUN echo "US/Pacific" | tee /etc/timezone \
     && mkdir -p /data \
     && curl -LO https://github.com/kmahyyg/deblan_gist_dockered/releases/download/caddy/caddy.tar.bz2 \
     && tar jxvf caddy.tar.bz2 \
-    && rm caddy.tar.bz2
+    && rm caddy.tar.bz2 \
+    && chmod +x caddy
      
 WORKDIR /opt/gistpb
 
-RUN git clone https://gitnet.fr/deblan/gist.git . \
-    && composer install \
-    && cp -f /data/gistpb/propel.yaml propel.yaml \
-    && ln -s /data/data /opt/gistpb/data \
-    && ln -s /data/caddyssl /root/.caddy \
-    && mkdir -p /opt/gistpb/data/git \
-    && mkdir -p /opt/gistpb/data/cache \
-    && chown -R www-data:www-data data \
-    && make propel \
-    && cp -f /data/gistpb/app/config/config.yml /opt/gistpb/app/config/config.yml \
-    && npm install
+COPY entrypoint.py /opt/gistpb
+COPY firsttime.sh /usr/bin
 
-# Run PHP-FPM and CADDY via Supervisord
-
+RUN chmod +x /usr/bin/firsttime.sh \
+    && chmod +x /opt/gistpb/entrypoint.py \
+    && git clone -b upstr https://github.com/kmahyyg/deblan_gist_dockered.git .
+    
 EXPOSE 9091
 EXPOSE 443
 EXPOSE 80
 
-# Cache Clean
-RUN rm -fr cache/* \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get purge -y --auto-remove
+# RUN INIT SCRIPT AND BUILD
+CMD ["/usr/bin/python3", "/opt/gistpb/entrypoint.py"]
 
-# Run supervisord
-CMD ["/usr/bin/supervisord", "-n", "-c", "/data/spvisord/supervisord.conf"]
+
