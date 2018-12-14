@@ -35,13 +35,16 @@ RUN apt-get update -y \
      
 WORKDIR /opt/gistpb
 
-COPY entrypoint.py /opt/gistpb
+
 COPY firsttime.sh /usr/bin
 
+RUN git clone -b upstr https://github.com/kmahyyg/deblan_gist_dockered.git .
+
+COPY entrypoint.py /opt/gistpb
+
 RUN chmod +x /usr/bin/firsttime.sh \
-    && chmod +x /opt/gistpb/entrypoint.py \
-    && git clone -b upstr https://github.com/kmahyyg/deblan_gist_dockered.git .
-    
+    && chmod +x /opt/gistpb/entrypoint.py
+
 EXPOSE 9091
 EXPOSE 443
 EXPOSE 80
