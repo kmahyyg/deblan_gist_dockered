@@ -1,6 +1,7 @@
-ccp.ooo {
+dk.lan {
     root /opt/gistpb/web
-    tls i@kmahyyg.xyz
+    #tls i@kmahyyg.xyz
+    tls off
     gzip
     minify
     cors
